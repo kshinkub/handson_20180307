@@ -1,3 +1,7 @@
+/* 
+   create table時にテーブルタイプを指定しない場合は
+   カラム型のテーブルが作成されます(HANA2 SPS03より)
+*/
 create COLUMN TABLE books(
     id BIGINT,
     isbn VARCHAR(128),
