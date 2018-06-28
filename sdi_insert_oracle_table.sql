@@ -1,0 +1,3 @@
+INSERT INTO SCOTT.REP_TEST VALUES (3, 'Hello Database');
+
+COMMIT;
