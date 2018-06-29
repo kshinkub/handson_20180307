@@ -1,0 +1,1 @@
+ssh hxeadm@hxehost2
