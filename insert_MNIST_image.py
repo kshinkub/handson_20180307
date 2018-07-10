@@ -8,7 +8,7 @@ import os
 from PIL import Image
 import numpy as np
 
-conn = dbapi.connect(address='localhost',databasename='HXE',port=39013,user='EMLUSER',password='SapHana8787')
+conn = dbapi.connect(address='localhost',databasename='HXE',port=39013,user='EMLUSER',password='...')
 cursor = conn.cursor()
 
 cursor.execute('TRUNCATE TABLE "MNIST"')
