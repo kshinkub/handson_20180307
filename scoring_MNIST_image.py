@@ -35,8 +35,8 @@ for img_file in img_files:
     request.inputs['images'].CopyFrom(
         tf.contrib.util.make_tensor_proto(image[0], shape=[1, image[0].size]))
     result_future = stub.Predict.future(request, 5.0)
-    response = np.array(
+    scores = np.array(
           result_future.result().outputs['scores'].float_val)
-    prediction = np.argmax(response)
+    prediction = np.argmax(scores)
     print('prediction='+str(prediction))
-    print(response)
+    print(scores)
