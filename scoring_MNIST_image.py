@@ -21,7 +21,7 @@ img_files = glob.glob("/tmp/sample/test/tf/*")
 for img_file in img_files:
     print('predicting... '+img_file)
     label = int(os.path.basename(img_file).split("_")[1])
-    print('lavel='+str(label))
+    print('label='+str(label))
 
     image = Image.open(img_file).convert('L')
     image.thumbnail((28, 28))
