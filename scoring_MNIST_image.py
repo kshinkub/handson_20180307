@@ -1,7 +1,6 @@
 import tensorflow as tf
 def _float_feature(value):
     return tf.train.Feature(float_list=tf.train.FloatList(value=value))
-
 import glob
 import os
 from PIL import Image
@@ -28,15 +27,21 @@ for img_file in img_files:
     image = np.array(image, dtype=np.float32)
     image = np.array(image / 255)
     image = image.reshape(1, 784)
+    example = tf.train.Example(
+        features = tf.train.Features(
+            feature = {'x': _float_feature(image[0]),
+    }))
+    serialized = example.SerializeToString()
 
     request = predict_pb2.PredictRequest()
     request.model_spec.name = 'mnist'
-    request.model_spec.signature_name = 'predict_images'
-    request.inputs['images'].CopyFrom(
-        tf.contrib.util.make_tensor_proto(image[0], shape=[1, image[0].size]))
+    request.model_spec.signature_name = 'serving_default'
+    request.inputs['inputs'].CopyFrom(
+        tf.contrib.util.make_tensor_proto(serialized, shape=[1]))
     result_future = stub.Predict.future(request, 5.0)
-    scores = np.array(
-          result_future.result().outputs['scores'].float_val)
-    prediction = np.argmax(scores)
-    print('prediction='+str(prediction))
+    classes = np.array(result_future.result().outputs['classes'].string_val)
+    scores  = np.array(result_future.result().outputs['scores'].float_val)
+    print 'classes: ',
+    print(classes)
+    print 'scores: ',
     print(scores)
