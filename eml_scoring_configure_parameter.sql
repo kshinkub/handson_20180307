@@ -1,3 +1,3 @@
 -- configure parameters
 TRUNCATE TABLE "PARAMS";
-INSERT INTO "PARAMS" VALUES ('Model', 'mnist%serving_default'); -- model%signature for TF serving
+INSERT INTO "PARAMS" VALUES ('Model', 'mnist'); -- model%signature for TF serving : default signature is serving_default
